@@ -175,17 +175,17 @@ describe('PATCH /todos/:id', () => {
   }); 
   
    it('should not update the todo of another creator', (done) => {
-    var hexId = todos[0]._id.toHexString(); 
+    var hexId = todos[1]._id.toHexString(); 
     request(app) 
       .patch(`/todos/${hexId}`)
-      .set('x-auth', users[1].tokens[0].token)
+      .set('x-auth', users[0].tokens[0].token)
       .send({"text": "Updated text", "completed": true})
       .expect(404) 
       .end(done);   
     });
 
    it('should clear completedAt when todo is not completed', (done) => {
-      var hexId = todos[1]._id.toHexString(); 
+      var hexId = todos[0]._id.toHexString(); 
       request(app) 
         .patch(`/todos/${hexId}`)
         .set('x-auth', users[1].tokens[0].token)
